@@ -1,5 +1,5 @@
 **** Regular expression for displaying quotes correctly ****
-'/[^A-Za-z0-9.,?\s\'\-]/'
+'/[^A-Za-z0-9.,\s\'\-]/'
 
 
 *** Regular expression for validating a birth date (must be AD) ***

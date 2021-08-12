@@ -210,3 +210,12 @@ input {
     display: inline-block;
 }
 
+/* ##### Results styling, includes 'tags' buttons ##### */
+.results {
+    background-color: #f7f7f7;
+    border: solid 1px #00c1b4;
+    padding: 10px;
+
+    margin-right: 20px;
+    border-radius: 20px;
+}
