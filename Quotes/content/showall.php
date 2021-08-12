@@ -41,9 +41,27 @@ do {
             // loop through subject ID's and look up the subject name
             foreach($all_subjects as $subject) {
                 // get subject name
-                $sub_sql = "";
+                $sub_sql = "SELECT * FROM `subject` WHERE `Subject_ID` = $subject";
                 $sub_query = mysqli_query($dbconnect, $sub_sql);
                 $sub_rs = mysqli_fetch_assoc($sub_query);
+
+                if($subject != 0)
+                {
+
+
+                ?>
+            <-- show subjects -->
+            <span class="tag">
+                <a href="index.php?page=subject&subjectID=<?php echo $sub_rs['Subject_ID']; ?>">
+                    <?php echo $sub_rs['Subject']; ?>
+                </a>
+            </span> &nbsp;
+
+        <?php
+
+            } // end subject exists if
+
+            unset($subject);
                 
             } // end subject loop
 
