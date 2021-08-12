@@ -228,3 +228,11 @@ input {
     border: solid 1px #000;
     border-radius: 5px;
 }
+
+.about {
+    background-color: bisque;
+    border: solid 1px #d37000;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
