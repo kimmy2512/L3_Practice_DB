@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // get data from form
     $quote = mysqli_real_escape_string($dbconnect, $_POST['quote']);
+    $notes = mysqli_real_escape_string($dbconnect, $_POST['notes']);
 
     // check data is valid
 
@@ -39,6 +40,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $has_errors = "yes";
         $quote_error = "error-text";
         $quote_field = "form-error";
+    }
+
+    // Check that first subject has been filled in 
+    if ($tag_1 == "") {
+        $has_errors = "yes";
+        $tag_1_error = "error-text";
+        $tag_1_field = "tag-error";
     }
 
 }   // end submit button if
@@ -66,9 +74,33 @@ else {
     <textarea class="add-field <?php echo $quote_field?>" name="quote" rows="6"><?php echo $quote; ?></textarea>
     <br/><br />
 
+    <input class="add-field <?php echo $notes; ?>" type="text" name="notes" value="<?php echo $notes; ?>" placeholder="Notes (optional)..."/>
+
+    <br/><br />
+
+    <div class="<?php echo $tag_1_error ?>">
+        Please enter at least one subject tag
+    </div>
+
+    <div class="autocomplete">
+        <input class="<?php echo $tag_1_field; ?>" id="subject1" type="text" name="Subject_1" placeholder="Subject 1 (Start typing)...">
+    </div>
+
+    <br/><br />
+
     <!-- Submit Button -->
     <p>
         <input type="submit" value="Submit" />
     </p>
 
 </form>
+
+<!-- Script to make autocomplete work -->
+<script>
+<?php include("autocomplete.php"); ?>
+
+/* Arrays containing lists */
+var all_tags = <?php print("$all_subjects"); ?>;
+autocomplete(document.getElementById("subject1"), all_tags);
+
+</script>

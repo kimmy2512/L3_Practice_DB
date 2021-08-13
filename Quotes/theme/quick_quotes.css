@@ -202,8 +202,12 @@ input {
     display: inline-block;
     border: 1px solid #000;
     box-sizing: border-box; 
+    width: 95%;
 }
 
+.input.short {
+    width: 100px;
+}
 
 .quicksearch {
     border-radius: 5px 0 0 5px; 
