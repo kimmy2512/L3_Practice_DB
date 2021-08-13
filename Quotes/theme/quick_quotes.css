@@ -252,3 +252,41 @@ select {
     height: 40px;
     padding: 5px;
 }
+
+/* controls input field on autocomplete boxes (pink for an error, white for OK) */
+input.tag-error[type=text] {
+    background-color: #ff9e9e;
+}
+
+input.tag-ok[type=text] {
+    background-color: #fff;
+}
+
+/* field backgrounds */
+.form-ok {
+    background-color: #fff;
+}
+
+.form-error {
+    background-color: #ff9e9e;
+}
+
+/* error messages */
+.no-error {
+    display: none;
+}
+
+.error-text {
+    color: darkred;
+}
+
+textarea,
+input[type=text] {
+    font-family: 'Lato', sans-serif;
+    padding: 10px;
+}
+
+textarea {
+    width: 90%;
+    max-width: 700px;
+}

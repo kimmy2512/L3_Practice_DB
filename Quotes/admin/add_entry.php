@@ -26,7 +26,24 @@ if (isset($_SESSION['admin'])) {
     $quote_field = "form-ok";
     $tag_1_field = "tag-ok";
 
-}   // end user logged in if
+// Code velow executes when the form is submitted...
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // get data from form
+    $quote = mysqli_real_escape_string($dbconnect, $_POST['quote']);
+
+    // check data is valid
+
+    // check quote is not blank
+    if ($quote == "Please type your quote here") {
+        $has_errors = "yes";
+        $quote_error = "error-text";
+        $quote_field = "form-error";
+    }
+
+}   // end submit button if
+
+}   // end if user logged in
 
 else {
 
@@ -40,5 +57,18 @@ else {
 <h1>Add Quote...</h1>
 
 <form autocomplete="off" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/add_entry");?>" enctype="multipart/form-data">
+
+<!-- Quote text area -->
+    <div class="<?php echo $quote_error; ?>">
+        This field can't be blank
+    </div>
+
+    <textarea class="add-field <?php echo $quote_field?>" name="quote" rows="6"><?php echo $quote; ?></textarea>
+    <br/><br />
+
+    <!-- Submit Button -->
+    <p>
+        <input type="submit" value="Submit" />
+    </p>
 
 </form>
