@@ -32,6 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // get data from form
     $quote = mysqli_real_escape_string($dbconnect, $_POST['quote']);
     $notes = mysqli_real_escape_string($dbconnect, $_POST['notes']);
+    $tag_1 = mysqli_real_escape_string($dbconnect, $_POST['Subject_1']);
+    $tag_2 = mysqli_real_escape_string($dbconnect, $_POST['Subject_2']);
+    $tag_3 = mysqli_real_escape_string($dbconnect, $_POST['Subject_3']);
 
     // check data is valid
 
@@ -88,6 +91,18 @@ else {
 
     <br/><br />
 
+    <div class="autocomplete">
+        <input id="subject2" type="text" name="Subject_2" placeholder="Subject 2 (Start typing)...">
+    </div>
+
+    <br/><br />
+
+    <div class="autocomplete">
+        <input id="subject3" type="text" name="Subject_3" placeholder="Subject 3 (Start typing)...">
+    </div>
+
+    <br/><br />
+
     <!-- Submit Button -->
     <p>
         <input type="submit" value="Submit" />
@@ -102,5 +117,7 @@ else {
 /* Arrays containing lists */
 var all_tags = <?php print("$all_subjects"); ?>;
 autocomplete(document.getElementById("subject1"), all_tags);
+autocomplete(document.getElementById("subject2"), all_tags);
+autocomplete(document.getElementById("subject3"), all_tags);
 
 </script>
