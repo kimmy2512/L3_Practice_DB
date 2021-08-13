@@ -109,10 +109,6 @@ function get_rs($dbconnect, $sql)
     
     return $find_rs;
 }
-
-
-function country_job($dbconnect, $entity_1, $entity_2, $label_sg, $label_pl, $table, $entity_ID, $entity_name)
-{
     
     $all_entities = array($entity_1, $entity_2);
     // loop through items and look up their values...
@@ -150,6 +146,5 @@ function country_job($dbconnect, $entity_1, $entity_2, $label_sg, $label_pl, $ta
         
     }
      
-}
 
 ?>
