@@ -52,6 +52,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $tag_1_field = "tag-error";
     }
 
+    if ($has_errors != "yes") {
+
+    }   // end add entry to database if
+
 }   // end submit button if
 
 }   // end if user logged in
