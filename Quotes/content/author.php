@@ -36,7 +36,7 @@ include("get_author.php");
     <p>
         <?php
         // show countries...
-        country_job($dbconnect, $country1, $country2, "Country", "Countries", "country", "Country_ID", "Country")
+        country_job($dbconnect, $country1, $country2, "Country", "Countries", "country", "Country_ID", "Birth_Country")
         ?>
     </p>
 
@@ -51,7 +51,6 @@ include("get_author.php");
 
 <br />
 
-<?php
 
 <?php
 
@@ -60,7 +59,8 @@ do {
 
     $quote = preg_replace('/[^A-Za-z0-9.,\s\'\-]/', ' ', $find_rs['Quote']);
 
-    ?>
+?>
+
 <div class="results">
     <p>
         <?php echo $quote; ?><br />
