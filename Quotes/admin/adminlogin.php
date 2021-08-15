@@ -26,6 +26,8 @@ if (password_verify($_REQUEST['password'] ,$login_rs['password'])) {
 else {
     echo 'Invalid password.';
     unset($_SESSION);
+    $login_error = "Incorrect username / password";
+    header("Location: index.php?page../admin/login&error=$login_error");
 
 }    // end invalid password else
 
