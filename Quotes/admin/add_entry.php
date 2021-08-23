@@ -61,6 +61,72 @@ if (isset($_SESSION['admin'])) {
 // Code velow executes when the form is submitted...
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    // if author is unknown, get values from author part of form
+    if($author_ID=="unknown") {
+        $first = mysqli_real_escape_string($dbconnect, $_POST['first']);
+        $middle = mysqli_real_escape_string($dbconnect, $_POST['middle']);
+        $last = mysqli_real_escape_string($dbconnect, $_POST['last']);
+        $yob = mysqli_real_escape_string($dbconnect, $_POST['yob']);
+
+        $gender = mysqli_real_escape_string($dbconnect, $_POST['gender']);
+        if ($gender_code=="F") {
+            $gender = "Female";
+        }
+        else if ($gender_code=="M") {
+            $gender = "Male";
+            }
+
+        else {
+            $gender = "";
+        }
+
+        $country_1 = mysqli_real_escape_string($dbconnect, $_POST['country1']);
+        $country_2 = mysqli_real_escape_string($dbconnect, $_POST['country2']);
+        $occupation_1 = mysqli_real_escape_string($dbconnect, $_POST['occupation1']);
+        $occupation_2 = mysqli_real_escape_string($dbconnect, $_POST['occupation2']);
+
+        // Error checking goes here
+
+        // check last name is not blank
+        if ($last == "") {
+            $has_errors = "yes";
+            $last_error = "error-text";
+            $last_field = "form-error";
+        }
+
+        // check year of birth is valid
+
+        $valid_yob = isValidYear($yob);
+
+        if($yob < 0 or $valid_yob != 1 or !preg_match('/^\d{1,4}$/', $yob))
+        {
+        $has_errors = "yes";
+        $yob_error = "error-text";
+        $yob_field = "form-error";
+        }
+
+        // check that first country is not blank
+        if($country_1 == "")       {
+            $has_errors = "yes";
+            $country_1_error = "error-text";
+            $country_1_field = "form-error";
+        }
+
+        // check that first country is not blank
+        if($occupation_1 == "")       {
+            $has_errors = "yes";
+            $occupation_1_error = "error-text";
+            $occupation_1_field = "form-error";
+            }
+
+        // get country and occupation IDs
+        $countryID_1 = get_ID($dbconnect, 'country', 'Country_ID', 'Country', $country_1);
+        $countryID_2 = get_ID($dbconnect, 'country', 'Country_ID', 'Country', $country_2);
+        $occupationID_1 = get_ID($dbconnect, 'career', 'Career_ID', 'Career', $occupation_1);
+        $occupationID_2 = get_ID($dbconnect, 'career', 'Career_ID', 'Career', $occupation_2);
+
+    }   // end geting author values if
+
     // get data from form
     $quote = mysqli_real_escape_string($dbconnect, $_POST['quote']);
     $notes = mysqli_real_escape_string($dbconnect, $_POST['notes']);
@@ -71,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // check data is valid
 
     // check quote is not blank
-    if ($quote == "Please type your quote here") {
+    if ($quote == "Please type your quote here" or $quote == "") {
         $has_errors = "yes";
         $quote_error = "error-text";
         $quote_field = "form-error";
@@ -90,6 +156,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $subjectID_1 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_1);
     $subjectID_2 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_2);
     $subjectID_3 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_3);
+
+    // add author to database if we have a new author...
+    if ($author_ID=="unknown")
+    {
+        // add author to database
+        $add_author_sql = "INSERT INTO `author` (`Author_ID`, `First`, `Middle`, `Last`, `Gender`, `Born`, `Country1_ID`, `Country2_ID`, `Career1_ID`, `Career2_ID`) VALUES (NULL, '$first', '$middle', '$last', '$gender_code', '$yob', '$countryID_1', '$countryID_2', '$occupationID_1', '$occupationID_2');";
+        $add_author_query = mysqli_query($dbconnect, $add_author_sql);
+
+        // Get Author ID
+        $find_author_sql = "SELECT * FROM `author` WHERE `Last` = '$last'";
+        $find_author_query = mysqli_query($dbconnect, $find_author_sql);
+        $find_author_rs = mysqli_fetch_assoc($find_author_query);
+
+        $new_authorID = $find_author_rs['Author_ID'];
+        echo "New Author ID:".$new_authorID;
+
+        $author_ID = $new_authorID;
+    }
 
     // add entry to database
     $addentry_sql = "INSERT INTO `quotes` (`ID`, `Author_ID`, `Quote`, `Notes`, `Subject1_ID`, `Subject2_ID`, `Subject3_ID`) VALUES (NULL, '$author_ID', '$quote', '$notes', '$subjectID_1', '$subjectID_2', '$subjectID_3');";
@@ -149,7 +233,7 @@ else {
 
     <br /><br />
 
-    <select class="adv <?php echo $gender_field; ?>" name="gender">
+    <select class="adv gender <?php echo $gender_field; ?>" name="gender">
 
         <?php
         if($gender_code=="") {
@@ -176,7 +260,7 @@ else {
     <br /><br />
 
     <div class="<?php echo $yob_error; ?>">
-        Author's Year of Birth can't be blank
+        Please enter a valid year of birth (modern authors only).
     </div>
 
     <input class="add-field <?php echo $yob_field; ?>" type="next" name="yob" value="<?php echo $yob; ?>" placeholder="Author's year of birth" />
@@ -188,7 +272,7 @@ else {
     </div>
 
     <div class="autocomplete ">
-        <input class="<?php $country_1_field; ?>" id="country1" type="next" name="country1" placeholder="Country 1 (Start Typeing)...">
+        <input class="<?php echo $country_1_field; ?>" id="country1" type="next" name="country1" placeholder="Country 1 (Start Typeing)...">
     </div>
 
     <br /><br />
@@ -204,7 +288,7 @@ else {
     </div>
 
     <div class="autocomplete ">
-        <input class="<?php $occupation_1_field; ?>" id="occupation1" type="next" name="occupation1" placeholder="Occupation 1 (Start Typeing)...">
+        <input class="<?php echo $occupation_1_field; ?>" id="occupation1" type="next" name="occupation1" placeholder="Occupation 1 (Start Typeing)...">
     </div>
 
     <br /><br />
