@@ -47,6 +47,25 @@ include("get_author.php");
         ?>
     </p>
 
+    <?php
+
+    // if logged in, show edit / delete options...
+    if (isset($_SESSION['admin'])) {
+
+        ?>
+    <div class="edit-tools">
+
+<!-- add quote in link -->
+<a href="index.php?page=../admin/editauthor&ID=<?php echo $find_rs['Author_ID']; ?>" title="Edit Author"><i class="fa fa-edit fa-2x"></i></a>
+
+&nbsp; &nbsp;
+
+<a href="index.php?page=../admin/deleteauthor_confirm&ID=<?php echo $find_rs['Author_ID']; ?>" title="Delete Author"><i class="fa fa-trash fa-2x"></i></a>
+
+    </div> <!-- / edit tools div -->
+
+    }
+
 </div> <!-- about the author div -->
 
 <br />
@@ -76,6 +95,6 @@ do {
 
 }    // end of display results 'do'
 
-while($find_rs = mysqli_fetch_assoc($find_query))
+while($find_rs = mysqli_fetch_assoc($find_query));
 
 ?>

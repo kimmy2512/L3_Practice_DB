@@ -8,8 +8,8 @@ if (isset($_SESSION['admin'])) {
     if ($author_ID=="unknown") {
 
     // get country & occupation lists from database
-    $all_countries_sql = "SELECT * FROM `country` ORDER BY `Country` ASC ";
-    $all_countries = autocomplete_list($dbconnect, $all_countries_sql, 'Country');
+    $all_countries_sql = "SELECT * FROM `country` ORDER BY `Birth Country` ASC ";
+    $all_countries = autocomplete_list($dbconnect, $all_countries_sql, 'Birth Country');
 
     $all_occupations_sql = "SELECT * FROM `career` ORDER BY `Career` ASC ";
     $all_occupations = autocomplete_list($dbconnect, $all_occupations_sql, 'Career');
@@ -120,8 +120,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
         // get country and occupation IDs
-        $countryID_1 = get_ID($dbconnect, 'country', 'Country_ID', 'Country', $country_1);
-        $countryID_2 = get_ID($dbconnect, 'country', 'Country_ID', 'Country', $country_2);
+        $countryID_1 = get_ID($dbconnect, 'country', 'Country_ID', 'Birth Country', $country_1);
+        $countryID_2 = get_ID($dbconnect, 'country', 'Country_ID', 'Birth Country', $country_2);
         $occupationID_1 = get_ID($dbconnect, 'career', 'Career_ID', 'Career', $occupation_1);
         $occupationID_2 = get_ID($dbconnect, 'career', 'Career_ID', 'Career', $occupation_2);
 
