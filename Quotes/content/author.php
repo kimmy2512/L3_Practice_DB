@@ -64,7 +64,9 @@ include("get_author.php");
 
     </div> <!-- / edit tools div -->
 
+    <?php
     }
+    ?>
 
 </div> <!-- about the author div -->
 
