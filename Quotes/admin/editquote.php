@@ -34,13 +34,13 @@ $subject2_ID = $find_rs['Subject2_ID'];
 $subject3_ID = $find_rs['Subject3_ID'];
 
 // retrieve subject names from subject table...
-$tag_1_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subejct1_ID");
+$tag_1_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subject1_ID");
 $tag_1 = $tag_1_rs['Subject'];
 
-$tag_2_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subejct2_ID");
+$tag_2_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subject2_ID");
 $tag_2 = $tag_2_rs['Subject'];
 
-$tag_3_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subejct3_ID");
+$tag_3_rs = get_rs($dbconnect, "SELECT * FROM `subject` WHERE Subject_ID = $subject3_ID");
 $tag_3 = $tag_3_rs['Subject'];
 
     // Initialise tag ID's
@@ -83,9 +83,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($has_errors != "yes") {
 
     // Get subject ID's via get_ID function...
-    $subjectID_1 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_1);
-    $subjectID_2 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_2);
-    $subjectID_3 = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_3);
+    $subject1_ID = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_1);
+    $subject2_ID= get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_2);
+    $subject3_ID = get_ID($dbconnect, 'subject', 'Subject_ID', 'Subject', $tag_3);
 
     // edit database entry
     $editentry_sql = "UPDATE `quotes` SET `Author_ID` = '$author_ID', `Quote` = '$quote', `Notes` = '$notes', `Subject1_ID` = '$subject1_ID', `Subject2_ID` = '$subject2_ID', `Subject3_ID` = '$subject3_ID' WHERE `quotes`.`ID` = $ID;";
@@ -122,7 +122,7 @@ else {
 
 <h1>Edit Quote...</h1>
 
-<form autocomplete="off" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/editquotes&ID=$ID");?>" enctype="multipart/form-data">
+<form autocomplete="off" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/editquote&ID=$ID");?>" enctype="multipart/form-data">
    
     <select class="adv gender" name="author">
         <!-- Default option is new author -->
