@@ -133,8 +133,8 @@ else {
         <?php
 
     // get authors from database
-    $all_authors_sql = "SELECT * FROM `author` ORDER BY `Last` ASC";
-    $all_athors_query = mysqli_query($dbconnect, $all_authors_sql);
+    $all_authors_sql = "SELECT * FROM `author` ORDER BY `author`.`Last` ASC";
+    $all_authors_query = mysqli_query($dbconnect, $all_authors_sql);
     $all_authors_rs = mysqli_fetch_assoc($all_athors_query);
 
         do {
