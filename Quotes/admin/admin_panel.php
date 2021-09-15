@@ -45,7 +45,7 @@ if (isset($_SESSION['admin'])) {
         
         <select name="author">
             <!-- Default option is new author -->
-            <option value="unknown" selected>New Author</option>
+            <option value="unknown" selected>Choose Author...</option>
             
             <?php
 

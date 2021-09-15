@@ -3,7 +3,7 @@
         <div class="box banner">
             
     
-            <h1>Quick Quotes</h1>
+            <h1><a class="heading" href="index.php?page=home">Quick Quotes</a></h1>
         </div>    <!-- / banner -->
 
         <!-- Navigation goes here.  Edit BOTH the file name and the link name -->
