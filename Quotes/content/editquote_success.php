@@ -4,7 +4,7 @@
 
 <?php
 
-$quote_ID=$_SESSION['Quote_Success'];
+$quote_ID=$_REQUEST['quote_ID'];
 
 $find_sql = "SELECT * FROM `quotes`
 JOIN author ON (`author`.`Author_ID` = `quotes`.`Author_ID`) WHERE `ID` = $quote_ID";

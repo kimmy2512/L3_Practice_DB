@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $quote_ID = $get_quote_rs['ID'];
 
     // Go to success page...
-    header('Location: index.php?page=quote_success&quote_ID='.$quote_ID);
+    header('Location: index.php?page=editquote_success&quote_ID='.$quote_ID);
 
     }   // end add entry to database if
 
@@ -124,6 +124,8 @@ else {
 
 <form autocomplete="off" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/editquote&ID=$ID");?>" enctype="multipart/form-data">
    
+    <p><i>If you need to change this quote's author and the author you need is NOT in the list below. Please <a href="index.php?page=../admin/add_author" target="_blank">add the author</a>. Then come back and reload this page to refresh the list.</i></p>
+
     <select class="adv gender" name="author">
         <!-- Default option is new author -->
         <option value="<?php echo $author_ID; ?>" selected>

@@ -61,7 +61,7 @@ include("get_author.php");
 
 &nbsp; &nbsp;
 
-<a href="index.php?page=../admin/deleteauthor_confirm&ID=<?php echo $find_rs['Author_ID']; ?>" title="Delete Author"><i class="fa fa-trash fa-2x"></i></a>
+<a href="index.php?page=../admin/deleteauthor_confirm&author_ID=<?php echo $find_rs['Author_ID']; ?>" title="Delete Author"><i class="fa fa-trash fa-2x"></i></a>
 
     </div> <!-- / edit tools div -->
 

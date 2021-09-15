@@ -64,6 +64,25 @@ if (isset($_SESSION['admin'])) {
 
             }  // end of author options 'do'
 
-            while ($all_authors_rs=mysqli_fetch_assoc($all_authors_query))
+            while ($all_authors_rs=mysqli_fetch_assoc($all_authors_query));
+
+            ?>
+        
+        </select>
+        &nbsp;
+
+        <input class="short" type="submit" name="quote_author" value="Next..." />
+
+    </form>
+
+    <hr />
+
+    <a href="index.php?page=../admin/logout">Logout</a>
+
+    <p>&nbsp;</p>
+
+            <?php
+
+        }   // end if user logged in...
 
             ?>
