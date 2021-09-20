@@ -132,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $editentry_author = mysqli_query($dbconnect, $editauthor_sql);
 
         // Go to author page...
-        header('Location: index.php?page=author&authorID='.$author_ID);
+        header('Location: index.php?page=author&author_ID='.$author_ID);
 
         }  // end add entry to database if
 
@@ -151,7 +151,7 @@ else {
 
 <h1>Edit Author...</h1>
 
-<form autocomplete="off" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/editauthor&authorID=$author_ID");?>" enctype="multipart/form-data">
+<form autocomplete="off" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?page=../admin/editauthor&author_ID=$author_ID");?>" enctype="multipart/form-data">
 
     <!-- Author's first name, optional -->
     <input class="add-field" type="text" name="first" value="<?php echo $first; ?>" placeholder="Author's First Name" />
@@ -211,13 +211,13 @@ else {
     </div>
 
     <div class="autocomplete ">
-        <input class="<?php echo $country_1_field; ?>" id="country1" type="next" name="country1" placeholder="Country 1 (Start Typing)...">
+        <input class="<?php echo $country_1_field; ?>" id="country1" type="next" name="country1" value="<?php echo $country_1; ?>"placeholder="Country 1 (Start Typing)...">
     </div>
 
     <br /><br />
     
     <div class="autocomplete ">
-        <input id="country2" type="next" name="country2" placeholder="Country 2 (Start Typing)...">
+        <input id="country2" type="next" name="country2" value="<?php echo $country_2; ?>"placeholder="Country 2 (Start Typing)...">
     </div>
 
     <br /><br />
@@ -227,13 +227,13 @@ else {
     </div>
 
     <div class="autocomplete ">
-        <input class="<?php echo $occupation_1_field; ?>" id="occupation1" type="next" name="occupation1" placeholder="Occupation 1 (Start Typing)...">
+        <input class="<?php echo $occupation_1_field; ?>" id="occupation1" type="next" name="occupation1" value="<?php echo $occupation_1; ?>"placeholder="Occupation 1 (Start Typing)...">
     </div>
 
     <br /><br />
     
     <div class="autocomplete ">
-        <input id="occupation2" type="next" name="occupation2" placeholder="Occupation 2 (Start Typing)...">
+        <input id="occupation2" type="next" name="occupation2" value="<?php echo $occupation_2; ?>"placeholder="Occupation 2 (Start Typing)...">
     </div>
 
     <br/><br />

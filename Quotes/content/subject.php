@@ -48,6 +48,14 @@ do {
         </a>
     </p>
 
-    }
+</div>
 
-    <?php include("show_subjects.php"); ?>
+    <?php
+
+        }
+    
+        while($find_rs = mysqli_fetch_assoc($find_query));
+
+        // include("show_subjects.php");
+
+    ?>

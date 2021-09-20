@@ -4,8 +4,8 @@
 if (isset($_SESSION['admin'])) {
 
     // get country & occupation lists from database
-    $all_countries_sql = "SELECT * FROM `country` ORDER BY `Birth Country` ASC ";
-    $all_countries = autocomplete_list($dbconnect, $all_countries_sql, 'Birth Country');
+    $all_countries_sql = "SELECT * FROM `country` ORDER BY `Birth_Country` ASC ";
+    $all_countries = autocomplete_list($dbconnect, $all_countries_sql, 'Birth_Country');
 
     $all_occupations_sql = "SELECT * FROM `career` ORDER BY `Career` ASC ";
     $all_occupations = autocomplete_list($dbconnect, $all_occupations_sql, 'Career');
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $last = mysqli_real_escape_string($dbconnect, $_POST['last']);
         $yob = mysqli_real_escape_string($dbconnect, $_POST['yob']);
 
-        $gender = mysqli_real_escape_string($dbconnect, $_POST['gender']);
+        $gender_code = mysqli_real_escape_string($dbconnect, $_POST['gender']);
         if ($gender_code=="F") {
             $gender = "Female";
         }
@@ -101,8 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
 
         // get country and occupation IDs
-        $countryID_1 = get_ID($dbconnect, 'country', 'Country_ID', 'Birth Country', $country_1);
-        $countryID_2 = get_ID($dbconnect, 'country', 'Country_ID', 'Birth Country', $country_2);
+        $countryID_1 = get_ID($dbconnect, 'country', 'Country_ID', 'Birth_Country', $country_1);
+        $countryID_2 = get_ID($dbconnect, 'country', 'Country_ID', 'Birth_Country', $country_2);
         $occupationID_1 = get_ID($dbconnect, 'career', 'Career_ID', 'Career', $occupation_1);
         $occupationID_2 = get_ID($dbconnect, 'career', 'Career_ID', 'Career', $occupation_2);
 
